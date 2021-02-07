@@ -37,7 +37,9 @@ app.use(mongoSanitize());
 app.use(xss());
 
 //parametr pollution
-app.use(hpp());
+app.use(hpp({
+    whitelist:[]
+}));
 
 //ROUTES
 app.use('/api/v1/property',propertyRouter);
