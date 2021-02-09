@@ -17,6 +17,13 @@ exports.getAllUser = catchAsync(async(req,res,next)=>{
         status:"success",
         users
     })
+});
+exports.getUser = catchAsync(async(req,res,next) => {
+    const user = await User.find({_id:req.params.id}).populate('wholeProperty');
+    res.status(200).json({
+        status:'success',
+        user
+    })
 })
 
 exports.updateMe = catchAsync(async(req,res,next) => {

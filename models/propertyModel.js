@@ -39,6 +39,11 @@ const propertySchema = new Schema({
   sellPurpose: {
     type: String,
   },
+  user:{
+    type:mongoose.Schema.ObjectId,
+    ref:'User',
+    required:[true,'each property should connect o a user']
+  }
  
 });
 

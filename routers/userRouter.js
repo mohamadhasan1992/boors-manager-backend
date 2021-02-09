@@ -12,4 +12,6 @@ router.patch("/updatepassword", authController.protect, authController.updatePas
 router.patch("/updateme", authController.protect, userController.updateMe);
 router.delete("/deleteme",authController.protect,userController.deleteMe);
 
+router.route('/:id').get(userController.getUser);
+
 module.exports = router;

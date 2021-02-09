@@ -2,61 +2,73 @@ const crypto = require('crypto');
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
+const WholeProperty = require("./wholePropertyModel");
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-    username:{
-        type:String,
+const userSchema = new Schema(
+  {
+    username: {
+      type: String,
     },
-    email:{
-        type:String,
-        required:[true,"a user must have an email"],
-        unique:true,
-        lowercase:true,
-        validate:[validator.isEmail,'please provide a valid email']
+    email: {
+      type: String,
+      required: [true, "a user must have an email"],
+      unique: true,
+      lowercase: true,
+      validate: [validator.isEmail, "please provide a valid email"],
     },
-    password:{
-        type:String,
-        required:[true,"a user must have a Password"],
-        minlength:8,
-        select:false
+    password: {
+      type: String,
+      required: [true, "a user must have a Password"],
+      minlength: 8,
+      select: false,
     },
-    passwordConfirm:{
-        type:String,
-        required:[true,"you should confrim your password"],
-        validate:{
-            validator: function(el){
-                return el === this.password;
-            }
-        }
+    passwordConfirm: {
+      type: String,
+      required: [true, "you should confrim your password"],
+      validate: {
+        validator: function (el) {
+          return el === this.password;
+        },
+      },
     },
-    photo:{
-        type:String,
-
+    photo: {
+      type: String,
     },
-    passwordChangedAt:Date,
-    role:{
-        type:String,
-        enum:['user','admin'],
-        default:'user'
+    passwordChangedAt: Date,
+    role: {
+      type: String,
+      enum: ["user", "admin"],
+      default: "user",
     },
-    passwordResetToken:{
-        type:String
+    passwordResetToken: {
+      type: String,
     },
-    passwordResetExpires:Date,
-    active:{
-        type:Boolean,
-        default:true,
-        select:false
-    }
-
-});
+    passwordResetExpires: Date,
+    active: {
+      type: Boolean,
+      default: true,
+      select: false,
+    },
+  },
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
+/// virtual populate
+userSchema.virtual('wholeProperty',{
+    ref:'WholeProperty',
+    foreignField:'user',
+    localField:'_id'
+})
 //creating a querry middleware when searching for find 
 userSchema.pre(/^find/,function(next){
     this.find({active:{ $ne: false}});
     next();
 })
+
 //set the changed at password attribute when modifing password
 userSchema.pre('save',function(next){
     if(!this.isModified('password') || this.isNew) return next();

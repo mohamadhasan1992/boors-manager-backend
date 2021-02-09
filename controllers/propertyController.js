@@ -2,6 +2,7 @@ const Property = require('../models/propertyModel');
 const AppError = require('../utils/AppError');
 const catchAsync = require('../utils/catchAsync');
 
+
 exports.updateProperty = catchAsync(async(req,res,next) => {
         const property = await Property.findByIdAndUpdate(req.params.id, req.body, {
             new:true,
@@ -35,7 +36,7 @@ exports.getProperty = catchAsync(async(req,res,next)=>{
             data:{
                 property
             }
-        })
+        }) 
        
 });
 exports.getAllProperties = catchAsync(async(req,res,next) => {
