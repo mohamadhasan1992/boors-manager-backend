@@ -52,6 +52,7 @@ exports.getAllProperties = catchAsync(async(req,res,next) => {
         })
     });
 exports.createProperty = catchAsync(async(req,res,next) => {
+    req.body.user = req.user._id;
         const property = await Property.create(req.body);
         console.log("added successfully");
         res.status(200).json({

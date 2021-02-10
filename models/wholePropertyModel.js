@@ -10,12 +10,12 @@ const wholePropertySchema = new mongoose.Schema(
       type: String, //medium
       required: [true, "each user should set a difficulty level"],
     },
-    //refrence to user id
-    user: {
-      type: mongoose.Schema.ObjectId,
-      ref: "User",
-      required: [true, "wholeProperty must belong to a user"],
-    },
+    user:{
+      type:mongoose.Schema.ObjectId,
+      ref:'User',
+      required:[true,'wholeProperty must have a user']
+    }
+    
   },
   {
     toJSON: { virtuals: true },

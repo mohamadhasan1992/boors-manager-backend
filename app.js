@@ -8,6 +8,7 @@ const hpp = require('hpp');
 const propertyRouter = require('./routers/propertyRouter');
 const wholePropertyRouter = require('./routers/wholePropertyRouter');
 const userRouter = require('./routers/userRouter');
+const dailyPropertyRouter = require('./routers/dailyPropertyRouter');
 const AppError = require('./utils/AppError');
 const globalErrorHandler = require('./controllers/errorController');
 
@@ -45,6 +46,7 @@ app.use(hpp({
 app.use('/api/v1/property',propertyRouter);
 app.use('/api/v1/wholeproperty',wholePropertyRouter);
 app.use("/api/v1/user", userRouter); 
+app.use("/api/v1/dailyproperty", dailyPropertyRouter); 
 
 
 //handling all unimplemented route

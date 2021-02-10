@@ -52,23 +52,46 @@ const userSchema = new Schema(
       select: false,
     },
   },
+  //virtual populating the wholeProerty
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
   }
 );
+
 /// virtual populate
-userSchema.virtual('wholeProperty',{
-    ref:'WholeProperty',
+userSchema.virtual("wholeProperty", {
+  ref: "WholeProperty",
+  foreignField: "user",
+  localField: "_id",
+});
+userSchema.virtual('properties',{
+    ref:'Property',
     foreignField:'user',
     localField:'_id'
-})
+});
+userSchema.virtual("dailyProperties", {
+  ref: "DailyProperty",
+  foreignField: "user",
+  localField: "_id",
+});
+//querry middleware for populating
+// userSchema.pre(/^find/,function(next){
+//   this.populate({
+//     path:properties
+//   });
+//   next();
+// })
 //creating a querry middleware when searching for find 
 userSchema.pre(/^find/,function(next){
     this.find({active:{ $ne: false}});
     next();
 })
 
+userSchema.pre('save', async function(next){
+  this.wholeProperty = await WholeProperty.findById(this.wholeProperty);
+  next();
+})
 //set the changed at password attribute when modifing password
 userSchema.pre('save',function(next){
     if(!this.isModified('password') || this.isNew) return next();

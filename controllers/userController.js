@@ -19,7 +19,7 @@ exports.getAllUser = catchAsync(async(req,res,next)=>{
     })
 });
 exports.getUser = catchAsync(async(req,res,next) => {
-    const user = await User.find({_id:req.params.id}).populate('wholeProperty');
+    const user = await User.find({_id:req.params.id}).populate('wholeProperty').populate('properties').populate('dailyProperties');
     res.status(200).json({
         status:'success',
         user
