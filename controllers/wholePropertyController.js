@@ -32,14 +32,14 @@ exports.createWholeProperty = catchAsync(async(req,res,next) => {
 exports.updateWholeProperty = catchAsync(async (req, res, next) => {
   const filteredBody = filterObj(req.body, "initialValue", "difficulty");
   //find the whole property that belongs to logged in user and update
-  const updatedProperty = await WholeProperty.findByIdAndUpdate(req.user.id, filteredBody, {
+  const updatedProperty = await WholeProperty.findByIdAndUpdate(req.params.id, filteredBody, {
     new: true,
     runValidators: true,
   });
   res.status(200).json({
     status: "success",
     data: {
-      property,
+      updatedProperty,
     },
   });
 });

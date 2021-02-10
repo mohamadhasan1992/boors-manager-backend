@@ -46,7 +46,7 @@ app.use(hpp({
 app.use('/api/v1/property',propertyRouter);
 app.use('/api/v1/wholeproperty',wholePropertyRouter);
 app.use("/api/v1/user", userRouter); 
-app.use("/api/v1/dailyproperty", dailyPropertyRouter); 
+app.use("/api/v1/dailyproperty", dailyPropertyRouter);
 
 
 //handling all unimplemented route
