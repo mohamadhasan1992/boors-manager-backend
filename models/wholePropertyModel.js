@@ -5,9 +5,10 @@ const wholePropertySchema = new mongoose.Schema(
     initialProperty: {
       type: Number,
       required: [true, "each user should have initial property value"],
+      default: 10000000
     },
     difficulty: {
-      type: String, //medium
+      type: Array,
       required: [true, "each user should set a difficulty level"],
     },
     user:{

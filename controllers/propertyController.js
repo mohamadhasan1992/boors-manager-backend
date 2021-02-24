@@ -8,6 +8,7 @@ exports.updateProperty = catchAsync(async(req,res,next) => {
             new:true,
             runValidators:true
         });
+        console.log(property);
         res.status(200).json({
             status:"success",
             data:{
@@ -52,9 +53,9 @@ exports.getAllProperties = catchAsync(async(req,res,next) => {
         })
     });
 exports.createProperty = catchAsync(async(req,res,next) => {
-    req.body.user = req.user._id;
+    //req.body.user = req.user._id;
         const property = await Property.create(req.body);
-        console.log("added successfully");
+        console.log(property);
         res.status(200).json({
           status: "success",
           data: {

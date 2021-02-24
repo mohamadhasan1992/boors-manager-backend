@@ -5,6 +5,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 
+const homeRouter = require('./routers/homeRouter');
 const propertyRouter = require('./routers/propertyRouter');
 const wholePropertyRouter = require('./routers/wholePropertyRouter');
 const userRouter = require('./routers/userRouter');
@@ -43,6 +44,7 @@ app.use(hpp({
 }));
 
 //ROUTES
+app.use('/api/v1/home', homeRouter);
 app.use('/api/v1/property',propertyRouter);
 app.use('/api/v1/wholeproperty',wholePropertyRouter);
 app.use("/api/v1/user", userRouter); 

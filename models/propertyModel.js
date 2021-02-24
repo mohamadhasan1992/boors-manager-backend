@@ -40,11 +40,13 @@ const propertySchema = new Schema(
     sellPurpose: {
       type: String,
     },
-    user: {
-      type: mongoose.Schema.ObjectId,
-      ref: "User",
-      required: [true, "each property should connect to a user"],
-    },
+    edit:false,
+    complete:false
+    // user: {
+    //   type: mongoose.Schema.ObjectId,
+    //   ref: "User",
+    //   required: [true, "each property should connect to a user"],
+    // },
   },
   {
     toJSON: { virtuals: true },
