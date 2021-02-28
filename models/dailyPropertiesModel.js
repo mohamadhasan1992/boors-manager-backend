@@ -7,7 +7,7 @@ const dailyPropertySchema = new mongoose.Schema(
       required: [true, "a dailyProperty must have a Day"],
     },
     date: {
-      type: Date,
+      type: String,
       required: [true, "a dailyProperty must have a Date"],
     },
     value: {

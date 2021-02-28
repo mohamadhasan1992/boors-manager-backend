@@ -13,7 +13,9 @@ exports.getFirstPageData = catchAsync(async(req,res,next)=>{
     if(!wholeProperty){
         return next(new AppError("cant find any wholeProperty",404));
     }
-    const data = { properties , wholeProperty};
+    const propertiesSum = properties.map(item => item.propertySum).reduce((prev,cur) => prev + cur,0);
+    console.log(`propertiesSum: ${propertiesSum}`);
+    const data = { properties , wholeProperty, propertiesSum};
 
     res.status(200).json({
         status:'success',

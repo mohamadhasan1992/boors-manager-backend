@@ -3,17 +3,12 @@ const Schema = mongoose.Schema;
 
 const propertySchema = new Schema(
   {
-    id: {
-      type: String,
-      required: [true, "each property should have an ID"],
-      unique: true,
-    },
     name: {
       type: String,
       required: [true, "each property should have a name"],
     },
     buyDate: {
-      type: Number,
+      type: String,
       required: [true, "each property should have a name"],
     },
     buyValue: {
@@ -28,8 +23,11 @@ const propertySchema = new Schema(
       type: String,
       required: [true, "each property should have a buyPurpose"],
     },
+    propertySum:{
+      type:Number
+    },
     sellDate: {
-      type: Number,
+      type: String,
     },
     sellValue: {
       type: Number,
@@ -53,6 +51,10 @@ const propertySchema = new Schema(
     toObject: { virtuals: true },
   }
 );
+propertySchema.pre("save", async function (next) {
+  this.propertySum = this.buyValue * this.buyPrice;
+  next();
+});
 
 const Property = mongoose.model('Property',propertySchema);
 module.exports = Property;
