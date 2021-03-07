@@ -11,11 +11,11 @@ const wholePropertySchema = new mongoose.Schema(
       type: Array,
       required: [true, "each user should set a difficulty level"],
     },
-    user:{
-      type:mongoose.Schema.ObjectId,
-      ref:'User',
-      required:[true,'wholeProperty must have a user']
-    }
+    // user:{
+    //   type:mongoose.Schema.ObjectId,
+    //   ref:'User',
+    //   required:[true,'wholeProperty must have a user']
+    // }
     
   },
   {

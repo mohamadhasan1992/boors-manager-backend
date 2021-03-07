@@ -44,6 +44,7 @@ exports.signup = catchAsync(async(req,res,next) =>{
         });
         //create jwt
         createAndSendToken(newUser,201,res);
+        console.log("user created");
         
 });
 exports.login = catchAsync(async(req,res,next) => {

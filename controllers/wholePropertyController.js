@@ -20,7 +20,7 @@ exports.getWholeProperty = catchAsync(async (req, res,next) => {
 });
 
 exports.createWholeProperty = catchAsync(async(req,res,next) => {
-    req.body.user = req.user.id;
+    // req.body.user = req.user.id;
     const wholeProperty = await WholeProperty.create(req.body);
     res.status(201).json({
         status:"success",
